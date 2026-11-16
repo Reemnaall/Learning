@@ -6,6 +6,7 @@
 
 
 import Foundation
+
 struct DayItem: Identifiable {
     
     let status:DayStatus

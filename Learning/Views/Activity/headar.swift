@@ -10,7 +10,8 @@ import SwiftUI
 struct headar: View {
     
     let today : Date
-    
+    var onOpenCalendar: () -> Void = {}
+    var onEditGoal: () -> Void = {}
     var body: some View {
         VStack(alignment:.leading) {
             HStack {
@@ -23,6 +24,9 @@ struct headar: View {
                 
                 HStack(spacing: 12) {
                     Button {
+                        
+                        onOpenCalendar()
+                        
                     } label: {
                         Image(systemName: "calendar")
                             .font(.body)
@@ -33,6 +37,7 @@ struct headar: View {
                     .buttonStyle(.plain)
                     
                     Button {
+                        onEditGoal()
                     } label: {
                         Image(systemName: "pencil.and.outline")
                             .font(.body)
@@ -56,13 +61,4 @@ struct headar: View {
             .foregroundStyle(.secondary)
         }
     }
-}
-
-#Preview {
-    VStack(alignment:.leading) {
-  
-        
-        headar(today:Date())
-    }
-    Spacer()
 }

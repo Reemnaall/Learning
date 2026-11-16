@@ -6,7 +6,7 @@
 
 
     
-    enum DayStatus{
+enum DayStatus: Codable{
         
        case learned
        case frozen

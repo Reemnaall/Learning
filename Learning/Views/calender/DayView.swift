@@ -34,13 +34,17 @@ struct DayView: View {
     private var isToday: Bool {
         calendar.isDate(day.date, inSameDayAs: referenceDate)
     }
+    
+    private var shouldHighlightToday: Bool {
+        isToday && status == .notLogged
+    }
 
     var backgroundColor: Color {
         switch status {
         case .learned:
             return .orange
         case .frozen:
-            return .blue
+            return .cyan
         case .notLogged:
             return .clear
         }
@@ -53,22 +57,14 @@ struct DayView: View {
             Text("\(dayNumber)")
                 .font(.title3)
                 .fontWeight(.medium)
-                .foregroundStyle(isToday ? Color.white : (status == .notLogged ? Color.primary :backgroundColor))
+                .foregroundStyle(shouldHighlightToday ? Color.white : (status == .notLogged ? Color.primary :backgroundColor))
                 .frame(width: 44, height: 44)
                 .background {
                         Circle()
-                        .fill(isToday ?  Color.orange :  backgroundColor.opacity(0.15))
+                        .fill(shouldHighlightToday ?  Color.orange :  backgroundColor.opacity(0.15))
 
                     }
         }
     }
 }
 
-#Preview {
-    let now = Date()
-    DayView(
-        day: DayItem(status: .notLogged, date: now),
-        calendar: .current,
-        referenceDate: now
-    )
-}

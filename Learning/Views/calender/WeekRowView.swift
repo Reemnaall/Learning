@@ -25,13 +25,3 @@ struct WeekRowView: View {
     }
 }
 
-#Preview {
-    let viewModel = ActivityViewModel()
-    let today = Date()
-
-    WeekRowView(
-        days: viewModel.daysOfWeek(for: today, statusesByDate: [:]),
-        calendar: viewModel.calendar,
-        referenceDate: today
-    )
-}

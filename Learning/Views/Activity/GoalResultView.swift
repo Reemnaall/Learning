@@ -12,7 +12,7 @@ struct GoalResultView: View {
     let iconName:String
     let title:String
     let subtitle:String
-    
+    var onSetGoal: () -> Void = {}
     
     var body: some View {
         VStack(spacing:0){
@@ -29,6 +29,9 @@ struct GoalResultView: View {
                 .foregroundStyle(.secondary)
             
             Button {
+                
+                onSetGoal()
+                
             } label: {
                 Label("Set a goal", systemImage: "pencil.and.outline")
                     .font(.body.weight(.medium))
@@ -37,26 +40,11 @@ struct GoalResultView: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
             .buttonBorderShape(.capsule)
-            .tint(.orange)
+            .keyboardShortcut(.defaultAction)
+            // .tint(.orange)
             .padding(.top, 68)
             
             
         }
     }}
     
-#Preview("Goal Completed") {
-        GoalResultView(
-            iconName: "hands.clap.fill",
-            title: "Will done!",
-            subtitle: "Ready for your next goal?"
-        )
-    }
-
-
-#Preview("Goal Completed") {
-        GoalResultView(
-            iconName: "hands.clap.fill",
-            title: "Will done!",
-            subtitle: "Ready for your next goal?"
-        )
-    }

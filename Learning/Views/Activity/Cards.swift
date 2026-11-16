@@ -9,16 +9,16 @@ import SwiftUI
 
 struct Cards: View {
     let icon: String
-    let days: Int
+   // let days: Int
+    let daysText: String
     let description:String
     let iconcolor: Color
-
+    
     var body: some View {
         VStack {
                     Image(systemName: icon)
-                        .foregroundStyle(iconcolor)
-
-                    Text("\(days) days")
+                    .foregroundStyle(iconcolor)
+                    Text(daysText)
                     Text(description)
                 }
         .frame(maxWidth:.infinity)
@@ -30,14 +30,3 @@ struct Cards: View {
     }
 }
 
-#Preview {
-    HStack(spacing: 12) {
-        Cards(icon:"flame.fill",
-              days:3,
-              description:"learner",
-              iconcolor:.orange)
-        Cards(icon:"snowflake",
-              days:3,
-              description:"freeze",
-              iconcolor:.blue)}
-}

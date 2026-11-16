@@ -3,12 +3,14 @@
 //  MyApp
 //
 //  Created by reem on 29/05/1448 AH.
-//
+
 
 import SwiftUI
 
 struct Onboarding: View {
-    @State private var subject = ""
+   // @State private var subject = ""
+    
+    @Bindable var vm:OnboardingViewModel
     
     var body: some View {
        
@@ -28,46 +30,24 @@ struct Onboarding: View {
                     .foregroundStyle(.secondary)
                 }
                 .padding(.bottom, 37)
-                /* Text("I want to learn")
-                    .foregroundStyle(.primary)
-                    .font(.callout)
-                    .padding(.bottom, 5)
-                TextField("swift",text: $subject)
-                    .frame(minHeight: 48)
-                Divider()
-                    .padding(.bottom, 30)
-               
-                Text("I want to learn it in a")
-                    .padding(.bottom, 13)
-                    .foregroundStyle(.primary)
-                    .font(.callout)
                 
-                HStack(spacing: 12) {
-                    Button("week") {
-                    }
-                    Button("month") {
-                    }
-                    Button("year") {
-                    }
-                }
-                .font(.body)
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-                .buttonStyle(.glass)
-                .tint(.orange)*/
-                
-              LearningGoalForm(subject:Binding.constant(""))
+                LearningGoalForm(subject: $vm.subject, duration: $vm.duration )
+              
+               // LearningGoalForm( duration: $vm.duration ,subject: $vm.subject)
             }
               .padding(.horizontal, 17)
             Spacer()
             VStack(spacing:12) {
                 Button("start learning") {
-                    
+                    vm.startLearning()
                 }
+                .disabled(!vm.canStart)
                 .font(.body)
                 .fontWeight(.medium)
                 .buttonStyle(.glassProminent)
-                .tint(.orange)
+                //.tint(.orange)
+//                .keyboardShortcut(.defaultAction)
+                .foregroundStyle(.accent)
                 Text("You can edit your desire later")
                 .foregroundStyle(.secondary)
                 .font(.caption)
@@ -81,8 +61,4 @@ struct Onboarding: View {
         
     
     }
-}
-
-#Preview {
-    Onboarding()
 }
