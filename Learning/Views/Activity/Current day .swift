@@ -17,7 +17,9 @@ struct Current_day_: View {
     
     var body: some View {
         let today = Date()
+        // يأخذ عدد الستريك من ViewModel لعرضه في البطاقة.
         let streakCount = viewModel.streak(for: goal, on: today)
+        // يجلب حالة الزرّين والعدد المستخدم والحد من مكان واحد.
         let decision = viewModel.actions(for: goal, on: today) // فيه قرار الزرّين والعدد المستخدم والحد
         let learnTint = viewModel.learnButtonTint(canLearn: decision.canLearn)
         let freezeTint = viewModel.freezeButtonTint(canFreeze: decision.canFreeze)
@@ -51,6 +53,7 @@ struct Current_day_: View {
                           iconcolor:.cyan)
                 }
             .padding(.horizontal, 16)
+                // يعرض النتيجة الجاهزة عند وجودها، وإلا يعرض أزرار التسجيل.
                 if let content = resultContent {
                     GoalResultView(
                         iconName: content.iconName,
@@ -80,6 +83,7 @@ struct Current_day_: View {
     }
 }
 
+// بيانات تجريبية لمعاينة الشاشة داخل Xcode.
 #Preview("Activity") {
     Current_day_(
         goal: LearningGoal(subject: "SwiftUI", duration: .week),

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Onboarding: View {
     
+    // يسمح بربط الحقول بخصائص ViewModel مباشرة.
     @Bindable var vm:OnboardingViewModel
     
     var body: some View {
@@ -37,13 +38,17 @@ struct Onboarding: View {
             Spacer()
             VStack(spacing:12) {
                 Button("start learning") {
+                    // يتحقق من النموذج وينشئ الهدف بالبيانات المكتوبة.
                     vm.startLearning()
                 }
+                // يمنع الضغط إذا الاسم أو المدة غير جاهزين.
                 .disabled(!vm.canStart)
                 .font(.body)
                 .fontWeight(.medium)
                 .buttonStyle(.glassProminent)
+                // يجعل عرض الزر مناسبًا للنص ومساحته الداخلية.
                 .buttonSizing(.fitted)
+                // يطلب حجم التحكم الكبير من النظام.
                 .controlSize(.large)
                 .tint(.orange)
           //    .keyboardShortcut(.defaultAction)

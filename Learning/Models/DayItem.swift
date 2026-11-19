@@ -7,13 +7,14 @@
 
 import Foundation
 
+// تاريخ اليوم وحالته مع هوية لعرضه في صف الأسبوع.
 struct DayItem: Identifiable {
     
     let status:DayStatus
     let  date:Date
+    // يستخدم تاريخ اليوم لتمييز خانته في ForEach.
     var id:Date{
         
-        date // برجع افهمها
-        
+        date 
     }
 }

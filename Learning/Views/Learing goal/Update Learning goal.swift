@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct Update_Learning_goal: View {
+    // يسمح بربط الحقول بخصائص ViewModel مباشرة.
     @Bindable var vm: OnboardingViewModel
+    // يأخذ إجراء إغلاق الصفحة من SwiftUI.
     @Environment(\.dismiss) private var dismiss
+    // يتابع هل تنبيه تأكيد التحديث مفتوح.
     @State private var showsUpdateAlert = false
     var body: some View {
         
@@ -23,6 +26,7 @@ struct Update_Learning_goal: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
+                            // يغلق صفحة التعديل ويرجع إلى النشاط.
                             dismiss()
                         } label: {
                             Image(systemName: "chevron.backward")
@@ -32,6 +36,7 @@ struct Update_Learning_goal: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
+                            // يظهر التنبيه قبل حفظ الهدف.
                             showsUpdateAlert = true
                         } label: {
                             Image(systemName: "checkmark")
@@ -40,18 +45,25 @@ struct Update_Learning_goal: View {
                         .buttonStyle(.borderedProminent)
                         .buttonBorderShape(.circle)
                       //.tint(.orange)
+                        // يجعل الإجراء افتراضيًا عند استخدام مفتاح Return.
                         .keyboardShortcut(.defaultAction)
+                        // يمنع الضغط إذا الاسم أو المدة غير جاهزين.
                         .disabled(!vm.canStart)
                     }
                     
                 }
+                // يعرض تأكيد التحديث ويربط فتحه بحالة التنبيه.
                 .alert("Update goal", isPresented: $showsUpdateAlert) {
+                    // يلغي التنبيه مع الاحتفاظ بمسودة النموذج.
                     Button("Dismiss", role: .cancel) {}
                    // Button("Update") {
                         Button("Update") {
+                            // يتحقق من النموذج وينشئ الهدف بالبيانات المكتوبة.
                             vm.startLearning()//تتحقق من الاسم والمدة، ثم تنشئ الهدف بهوية وبداية جديدتين.
+                            // يغلق صفحة التعديل ويرجع إلى النشاط.
                             dismiss()
                         }
+                        // يجعل الإجراء افتراضيًا عند استخدام مفتاح Return.
                         .keyboardShortcut(.defaultAction)
                    
                 } message: {

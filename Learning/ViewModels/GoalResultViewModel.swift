@@ -8,6 +8,7 @@
 import Foundation
 
 
+// يحمل النصوص والأيقونة الجاهزة لعرض نتيجة الهدف.
 struct GoalResultContent {
     let iconName: String
     let title: String
@@ -16,24 +17,30 @@ struct GoalResultContent {
 
 final class GoalResultViewModel {
     
+    // يتحقق من الوصول إلى وقت النهاية أو تجاوزه.
     func hasGoalEnded(now: Date, end: Date) -> Bool { // تحدد متي تعرض النتيجه
         return now >= end
     }
     
     
+    // يتأكد أن كل يوم في الفترة مسجّل لهذا الهدف.
     func isGoalComplete(
         goal: LearningGoal,
         period: Range<Date>,
         store: ActivityStore,
         calendar: Calendar
     ) -> Bool {
+        // يبدأ الفحص من أول يوم في الفترة.
         var day = period.lowerBound
 
+        // يمر على أيام الهدف حتى ما قبل وقت النهاية.
         while day < period.upperBound {
+            // غياب تسجيل أي يوم يعني أن الهدف غير مكتمل.
             guard let entry = store.entriesByDate[day] else {
                 return false
             }
 
+            // تسجيل هدف آخر لا يغطي هذا اليوم للهدف الحالي.
             if entry.goalID != goal.id {
                 return false
             }
@@ -53,6 +60,7 @@ final class GoalResultViewModel {
     }
     
     
+    // يختار محتوى النجاح أو عدم التحقق.
     func content(for completed: Bool) -> GoalResultContent {
         if completed {
             return GoalResultContent(
@@ -68,6 +76,7 @@ final class GoalResultViewModel {
             subtitle: "Want to set another goal?"
         )
     }
+    // يرجع محتوى النتيجة بعد انتهاء المدة، وnil أثناء استمرارها.
     func resultContent(   //إذا الهدف لسه مستمر، ترجع nil فتظل أزرار النشاط ظاهرة. وإذا انتهى، تفحص أيامه وترجع الأيقونة والنص المناسب لـ**«اكتمل الهدف»** أو «لم يتحقق الهدف».
         for goal: LearningGoal,
         now: Date,

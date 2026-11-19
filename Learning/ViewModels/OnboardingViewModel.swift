@@ -8,13 +8,16 @@ import Foundation
 import Observation
 
 
+// يدير مسودة النموذج والهدف الحالي واستعادة بياناته.
 @Observable class OnboardingViewModel{
     
     var  duration:LearningDuration? = nil
     var subject:String = ""
     var currentGoal:LearningGoal? = nil
     
+    // يسمح بالحفظ بعد كتابة اسم واختيار مدة.
     var canStart:Bool{  // في حال المستخدم اختار فتره وهدف
+        // يزيل الفراغات والأسطر من أطراف الاسم قبل التحقق.
         let result = subject.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard  result != "" && duration != nil  else {
@@ -23,6 +26,7 @@ import Observation
         
         return true }
         
+        // ينشئ هدفًا جديدًا بعد التحقق من النموذج.
         func  startLearning(){ // هينا عشان مشكله الفترة ممكن تكون فاضيه فلازم اتأكد اذا فاضيه ولالا
             guard canStart, let durationn = duration else {
             return
@@ -31,12 +35,14 @@ import Observation
 
         }
         
+    // يفضّي مسودة النموذج مع إبقاء الهدف الحالي حتى تأكيد الحفظ.
     func prepareNewGoal() {
         subject = ""
         duration = nil
 
     }
         
+    // يعيد الهدف والسجل المحفوظين عند فتح التطبيق.
     func restoreSavedData(from activityStore: ActivityStore) {
         do {
             if let savedData = try LearningPersistence().load() {
@@ -48,6 +54,7 @@ import Observation
         }
     }
 
+    // يمرّر القيم الحالية إلى مسؤول الحفظ.
     func saveCurrentData(from activityStore: ActivityStore) {
         LearningPersistence().saveLearningData(
             currentGoal: currentGoal,

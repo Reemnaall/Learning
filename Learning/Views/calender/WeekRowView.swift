@@ -14,6 +14,7 @@ struct WeekRowView: View {
 
     var body: some View {
         HStack(spacing: 10) {
+            // يرسم خلية لكل يوم من أيام الأسبوع.
             ForEach(days) { day in
                 DayView(
                     day: day,

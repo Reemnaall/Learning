@@ -18,18 +18,22 @@ struct GoalResultView: View {
         VStack(spacing:0){
             
             Image(systemName: iconName)
+                // يضبط حجم الخط ووزنه لهذا العنصر.
                 .font(.system(size: 40, weight: .regular))
                 .foregroundStyle(.orange)
                 .padding(.bottom, 19)
             Text(title)
+                // يضبط حجم الخط ووزنه لهذا العنصر.
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(.primary)
             Text(subtitle)
+                // يضبط حجم الخط ووزنه لهذا العنصر.
                 .font(.system(size: 14, weight:.medium))
                 .foregroundStyle(.secondary)
             
             Button {
                 
+                // يشغّل نفس مسار فتح نموذج الهدف الجديد.
                 onSetGoal()
                 
             } label: {
@@ -38,8 +42,10 @@ struct GoalResultView: View {
                     .foregroundStyle(.primary)
             }
             .buttonStyle(.borderedProminent)
+            // يطلب حجم التحكم الكبير من النظام.
             .controlSize(.large)
             .buttonBorderShape(.capsule)
+            // يجعل الإجراء افتراضيًا عند استخدام مفتاح Return.
             .keyboardShortcut(.defaultAction)
             // .tint(.orange)
             .padding(.top, 68)

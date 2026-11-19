@@ -6,6 +6,7 @@
 
 
     
+// الحالات الثلاث الممكنة لليوم.
 enum DayStatus: Codable{
         
        case learned

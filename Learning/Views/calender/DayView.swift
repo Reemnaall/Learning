@@ -13,11 +13,13 @@ struct DayView: View {
     let calendar: Calendar
     let referenceDate: Date
     
+    // يستخرج الحرف المختصر لاسم يوم الأسبوع.
     private var weekday: String {
         let index = calendar.component(.weekday, from: day.date) - 1
         return calendar.veryShortWeekdaySymbols[index]
     }
     
+    // يستخرج رقم اليوم داخل الشهر.
     private var dayNumber: Int {
         calendar.component(.day, from: day.date)
     }
@@ -26,14 +28,17 @@ struct DayView: View {
         day.status
     }
     
+    // يقارن التاريخين على مستوى اليوم.
     private var isToday: Bool {
         calendar.isDate(day.date, inSameDayAs: referenceDate)
     }
     
+    // يبرز اليوم الحالي إذا لم يسجّل بعد.
     private var shouldHighlightToday: Bool {
         isToday && status == .notLogged
     }
 
+    // يختار لون التعلّم أو التجميد أو الخانة الفارغة.
     var backgroundColor: Color {
         switch status {
         case .learned:

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct LearningGoalForm: View {
+    // يربط حقل الاسم بمسودة الشاشة التي تستخدم النموذج.
     @Binding  var subject:String
+    // يربط اختيار المدة بمسودة النموذج المشتركة.
     @Binding var duration: LearningDuration?
     
     var body: some View {
@@ -27,7 +29,9 @@ struct LearningGoalForm: View {
             .font(.callout)
         
         HStack(spacing: 12) {
+            // يرسم زرًا لكل مدة متاحة.
             ForEach(LearningDuration.allCases, id: \.self) { option in
+                // يميّز المدة المختارة بنمط الزجاج البارز.
                 if duration == option {
                     Button(option.title) { duration = option }
                         .buttonStyle(.glassProminent)
@@ -38,10 +42,13 @@ struct LearningGoalForm: View {
                 }
             }
         }
+        // يجعل عرض الزر مناسبًا للنص ومساحته الداخلية.
         .buttonSizing(.fitted)
+        // يطلب حجم التحكم الكبير من النظام.
         .controlSize(.large)
         .font(.body)
         .fontWeight(.medium)
+        // يجعل الإجراء افتراضيًا عند استخدام مفتاح Return.
         .keyboardShortcut(.defaultAction)
     
     }
