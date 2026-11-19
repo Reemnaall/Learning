@@ -29,8 +29,9 @@ struct headar: View {
                         
                     } label: {
                         Image(systemName: "calendar")
-                            .font(.body)
-                            .fontWeight(.medium)
+                           // .font(.body)
+                           // .fontWeight(.medium)
+                            .font(.system(size: 20, weight: .medium))
                             .frame(width: 44, height: 44)
                             .glassEffect(.regular, in: Circle())
                     }
@@ -40,8 +41,9 @@ struct headar: View {
                         onEditGoal()
                     } label: {
                         Image(systemName: "pencil.and.outline")
-                            .font(.body)
-                            .fontWeight(.medium)
+                            //.font(.body)
+                          //  .fontWeight(.medium)
+                            .font(.system(size: 20, weight: .medium))
                             .frame(width: 44, height: 44)
                             .glassEffect(.regular, in: Circle())
                     }

@@ -4,7 +4,7 @@
 //
 //  Created by reem on 01/06/1448 AH.
 //
-//مافهمته
+//
 import SwiftUI
 
 struct WeekRowView: View {

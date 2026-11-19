@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct DayView: View {
-    /*
-     let weekday:String
-     let  dayNumber:Int
-     let  status:DayStatus
-     let isToday: Bool
-     */
+
     let day: DayItem
     let calendar: Calendar
     let referenceDate: Date

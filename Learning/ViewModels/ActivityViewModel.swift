@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct DayEntry: Codable,Equatable{
+/*struct DayEntry: Codable,Equatable{
     let status: DayStatus
     let goalID: UUID
     let loggedAt: Date// وقت التسجيل الفعلي عشان ٣٢
 }
-
+*/
 @Observable final class ActivityViewModel {
     let calendar: Calendar
     private let store: ActivityStore
@@ -29,37 +29,18 @@ struct DayEntry: Codable,Equatable{
     }
     
     
-    func startOfWeek(for date: Date) -> Date? {  //تستقبل تاريخًا وترجع بداية أسبوعه
-        let week = calendar.dateInterval(of: .weekOfYear, for: date)
-        return week?.start
-    }
-    
-    func weekDates(startingAt weekStart: Date) -> [Date] { // نرجع ايام الاسبوع السبعه
-        (0...6).compactMap { dayOffset in
-            calendar.date(byAdding: .day, value: dayOffset, to: weekStart)
-        }
-    }
-    
-   func datesOfWeek(for date: Date) -> [Date] {// تجمع الاثنين
-        guard let start = startOfWeek(for: date) else {
+
+    func datesOfWeek(for date: Date) -> [Date] {
+        guard let week = calendar.dateInterval(of: .weekOfYear, for: date) else {
             return []
         }
 
-        return weekDates(startingAt: start)
-        
-    }
-   /* func daysOfWeek(   // اجلت فهمها
-        for date: Date,
-        statusesByDate: [Date: DayStatus]
-    ) -> [DayItem] {
-        datesOfWeek(for: date).map { date in
-            let dayStart = calendar.startOfDay(for: date)
-            let status = statusesByDate[dayStart] ?? .notLogged
-
-            return DayItem(status: status, date: dayStart)
+        return (0..<7).compactMap { offset in
+            calendar.date(byAdding: .day, value: offset, to: week.start)
         }
-    }*/
     
+    }
+   
     func dayItem(for date: Date) -> DayItem {  // تقرا
         let dayStart = calendar.startOfDay(for: date)
         let status = store.entriesByDate[dayStart]?.status ?? .notLogged
@@ -211,6 +192,22 @@ struct DayEntry: Codable,Equatable{
         return nil
     }
     
+    func learnButtonTitle(canLearn: Bool) -> String {
+        if canLearn {
+            return "Log as Learned"
+        }
+
+        return "Logged as Learned"
+    }
+
+    func freezeButtonTitle(canFreeze: Bool) -> String {
+        if canFreeze {
+            return "Freeze for a day"
+        }
+
+        return "Freezed for a day"
+    }
+    
     func streak(for goal: LearningGoal, on date: Date) -> Int {
         let limitInSeconds: TimeInterval = 32 * 60 * 60
 
@@ -247,6 +244,7 @@ struct DayEntry: Codable,Equatable{
 
         return count
     }
+    
     func daysText(for days: Int) -> String {
         if days == 1 {
             return "\(days) day"

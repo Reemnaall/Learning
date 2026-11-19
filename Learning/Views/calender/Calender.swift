@@ -33,12 +33,13 @@ struct Activities: View {
     private func monthView(_ month: CalendarMonth) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(month.firstDay, format: .dateTime.month(.wide).year())
-                .font(.subheadline.weight(.semibold))
-
+                //.font(.subheadline.weight(.semibold))
+                .font(.system(size: 17, weight: .semibold))
             LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(weekdays, id: \.self) { weekday in
                     Text(weekday)
-                        .font(.caption2.weight(.semibold))
+                        .font(.system(size: 13, weight: .bold))
+                    //  .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
 
@@ -57,6 +58,7 @@ struct Activities: View {
 
     private func dayCell(_ day: CalendarDay) -> some View {
         Text("\(day.number)")
+            .font(.system(size: 20, weight: .regular))//توي ضفته اتاكد 
             .foregroundStyle(dayColor(day.status))
             .frame(width: 32, height: 32)
             .background(dayBackground(day.status), in: Circle())

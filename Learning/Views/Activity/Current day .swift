@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct Current_day_: View {
-    
-    //  private let viewModel = ActivityViewModel()
+ 
     let goal: LearningGoal
     let viewModel: ActivityViewModel
     var resultContent: GoalResultContent? = nil
@@ -29,6 +28,7 @@ struct Current_day_: View {
                 onOpenCalendar: onOpenCalendar,
                 onEditGoal: onEditGoal
             )
+            .padding(.horizontal, 16)
             .padding(.bottom ,18)
             
             WeekRowView(
@@ -40,16 +40,17 @@ struct Current_day_: View {
             VStack(spacing: 48) {
                 HStack(spacing: 12){
                     Cards(icon:"flame.fill",
-                         // days:streakCount,
+                      
                           daysText: viewModel.daysText(for: streakCount),
-                          description:"learner",
+                          description:"learned",
                           iconcolor:.orange)
                     Cards(icon:"snowflake",
-                          //days: decision.used,
+                      
                           daysText: viewModel.daysText(for: decision.used),
-                          description:"freeze",
+                          description:"freezed",
                           iconcolor:.cyan)
                 }
+            .padding(.horizontal, 16)
                 if let content = resultContent {
                     GoalResultView(
                         iconName: content.iconName,
@@ -69,12 +70,20 @@ struct Current_day_: View {
                         freezesUsed: decision.used,
                         freezeLimit: decision.limit,
                         canLearn: decision.canLearn,
-                        canFreeze: decision.canFreeze,learnTint: learnTint,freezeTint: freezeTint
+                        canFreeze: decision.canFreeze,learnTint: learnTint,freezeTint: freezeTint,learnTitle: viewModel.learnButtonTitle(canLearn: decision.canLearn),
+                        freezeTitle: viewModel.freezeButtonTitle(canFreeze: decision.canFreeze)
                     )
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
     }
+}
+
+#Preview("Activity") {
+    Current_day_(
+        goal: LearningGoal(subject: "SwiftUI", duration: .week),
+        viewModel: ActivityViewModel()
+    )
 }
 

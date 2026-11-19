@@ -26,23 +26,6 @@ struct LearningGoalForm: View {
             .foregroundStyle(.primary)
             .font(.callout)
         
-        /*   HStack(spacing: 12) {
-         Button("week") {
-         duration = .week
-         }
-         Button("month") {
-         duration = .month
-         }
-         Button("year") {
-         duration = .year
-         }
-         }
-         .font(.body)
-         .fontWeight(.medium)
-         .foregroundStyle(.secondary)
-         .buttonStyle(.glass)
-         .tint(.orange)*/
-        
         HStack(spacing: 12) {
             ForEach(LearningDuration.allCases, id: \.self) { option in
                 if duration == option {
@@ -55,9 +38,10 @@ struct LearningGoalForm: View {
                 }
             }
         }
+        .buttonSizing(.fitted)
+        .controlSize(.large)
         .font(.body)
         .fontWeight(.medium)
-        //.tint(.orange)
         .keyboardShortcut(.defaultAction)
     
     }

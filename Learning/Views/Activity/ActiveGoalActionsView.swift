@@ -17,15 +17,18 @@ struct ActiveGoalActionsView: View {
     let canFreeze: Bool
     let learnTint: Color?
     let freezeTint: Color?
+    let learnTitle: String
+    let freezeTitle: String
     var body: some View {
         
         VStack(spacing: 48) {
             Button {
                 onLogLearned()
             } label: {
-                Text("Log as Learned")
-                    .font(.body)
-                    .fontWeight(.medium)
+                Text(learnTitle)
+                    .font(.system(size: 17, weight: .bold))
+                   // .font(.body)
+                   // .fontWeight(.medium)
                     .frame(width: 272, height: 272)
                   //  .glassEffect(.regular.tint(.orange), in: Circle())
                     .glassEffect(.regular.tint(learnTint), in: Circle())
@@ -37,9 +40,11 @@ struct ActiveGoalActionsView: View {
                 Button {
                     onFreeze()
                 } label: {
-                    Text("Freeze for a day")
-                        .font(.body)
-                        .fontWeight(.medium)
+                    Text(freezeTitle)
+                        .font(.system(size: 17, weight: .medium))
+                     //   .font(.body.weight(.medium))
+                    //    .font(.body)
+                      //  .fontWeight(.medium)
                         .frame(width: 272, height: 46)
                        // .glassEffect(.regular.tint(.cyan), in: Capsule())
                         .glassEffect(.regular.tint(freezeTint), in: Capsule())
@@ -49,7 +54,8 @@ struct ActiveGoalActionsView: View {
                 
                 Text("\(freezesUsed) out of \(freezeLimit) Freezes used")
                     .foregroundStyle(.secondary)
-                    .font(.caption)
+                  //  .font(.caption)
+                    .font(.system(size: 14, weight: .regular))
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)

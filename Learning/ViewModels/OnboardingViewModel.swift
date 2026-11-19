@@ -37,7 +37,23 @@ import Observation
 
     }
         
-        
+    func restoreSavedData(from activityStore: ActivityStore) {
+        do {
+            if let savedData = try LearningPersistence().load() {
+                activityStore.entriesByDate = savedData.entriesByDate
+                currentGoal = savedData.currentGoal
+            }
+        } catch {
+            print("Could not load Learning data: \(error)")
+        }
+    }
+
+    func saveCurrentData(from activityStore: ActivityStore) {
+        LearningPersistence().saveLearningData(
+            currentGoal: currentGoal,
+            entriesByDate: activityStore.entriesByDate
+        )
+    }
         
         
         

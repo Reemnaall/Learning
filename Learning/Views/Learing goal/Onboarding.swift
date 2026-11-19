@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Onboarding: View {
-   // @State private var subject = ""
     
     @Bindable var vm:OnboardingViewModel
     
@@ -32,8 +31,7 @@ struct Onboarding: View {
                 .padding(.bottom, 37)
                 
                 LearningGoalForm(subject: $vm.subject, duration: $vm.duration )
-              
-               // LearningGoalForm( duration: $vm.duration ,subject: $vm.subject)
+                
             }
               .padding(.horizontal, 17)
             Spacer()
@@ -45,9 +43,11 @@ struct Onboarding: View {
                 .font(.body)
                 .fontWeight(.medium)
                 .buttonStyle(.glassProminent)
-                //.tint(.orange)
-//                .keyboardShortcut(.defaultAction)
-                .foregroundStyle(.accent)
+                .buttonSizing(.fitted)
+                .controlSize(.large)
+                .tint(.orange)
+          //    .keyboardShortcut(.defaultAction)
+               //.foregroundStyle(.accent)
                 Text("You can edit your desire later")
                 .foregroundStyle(.secondary)
                 .font(.caption)
