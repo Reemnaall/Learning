@@ -39,11 +39,13 @@ struct RootView: View {
                     )
                     Current_day_(
                         goal: goal,
-                        viewModel: activity,
-                        resultContent: result,
+                        viewModel: activity ,
+                        resultContent: result ,
+                        
                         onOpenCalendar: {
                             showsCalendar = true
-                        },onEditGoal: {
+                        }
+                        ,onEditGoal: {
                             vm.prepareNewGoal()
                             showsGoalEditor = true
                         }

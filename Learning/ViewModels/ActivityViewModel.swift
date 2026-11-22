@@ -185,40 +185,8 @@ import SwiftUI
         return (canLearn: true, canFreeze: hasFreezesLeft, used: used, limit: limit)
     }
     
-    // يجهّز صبغة زر التعلّم حسب السماح بالضغط.
-    func learnButtonTint(canLearn: Bool) -> Color? {
-        if canLearn {
-            return .orange
-        }
 
-        return nil
-    }
-    // يجهّز صبغة زر التجميد حسب السماح بالضغط.
-    func freezeButtonTint(canFreeze: Bool) -> Color? {
-        if canFreeze {
-            return .cyan
-        }
 
-        return nil
-    }
-    
-    // يختار نص زر التعلّم حسب حالته.
-    func learnButtonTitle(canLearn: Bool) -> String {
-        if canLearn {
-            return "Log as Learned"
-        }
-
-        return "Logged as Learned"
-    }
-
-    // يختار نص زر التجميد حسب حالته.
-    func freezeButtonTitle(canFreeze: Bool) -> String {
-        if canFreeze {
-            return "Freeze for a day"
-        }
-
-        return "Freezed for a day"
-    }
     
     // يحسب سلسلة التعلّم اعتمادًا على وقت التسجيل وهوية الهدف.
     func streak(for goal: LearningGoal, on date: Date) -> Int {
@@ -273,3 +241,38 @@ import SwiftUI
     }
 }
 
+extension ActivityViewModel {
+    // يختار نص زر التعلّم حسب حالته.
+    func learnButtonTitle(canLearn: Bool) -> String {
+        if canLearn {
+            return "Log as Learned"
+        }
+
+        return "Logged as Learned"
+    }
+
+    // يختار نص زر التجميد حسب حالته.
+    func freezeButtonTitle(canFreeze: Bool) -> String {
+        if canFreeze {
+            return "Freeze for a day"
+        }
+
+        return "Freezed for a day"
+    }
+    // يجهّز صبغة زر التعلّم حسب السماح بالضغط.
+    func learnButtonTint(canLearn: Bool) -> Color? {
+        if canLearn {
+            return .orange
+        }
+
+        return nil
+    }
+    // يجهّز صبغة زر التجميد حسب السماح بالضغط.
+    func freezeButtonTint(canFreeze: Bool) -> Color? {
+        if canFreeze {
+            return .cyan
+        }
+
+        return nil
+    }
+}

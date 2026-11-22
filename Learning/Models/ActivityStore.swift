@@ -3,7 +3,7 @@
 //  Learning
 //
 //  Created by reem on 04/06/1448 AH.
-//
+//يجمع بيانات تسجيل النشاط والمخزن المشترك
 
 
 import Foundation

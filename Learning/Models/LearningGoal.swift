@@ -3,7 +3,7 @@
 //  Learning
 //
 //  Created by reem on 02/06/1448 AH.
-//
+// يمثّل بيانات هدف تعلّم واحد
 
 import Foundation
 
